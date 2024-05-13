@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="commentList(comments)">
+    <div>
+        <div th:replace="~{comment/comment :: comment}"></div>
+        <div th:replace="~{comment/comment :: comment}"></div>
+        <div th:replace="~{comment/comment :: comment}"></div>
+        <div th:replace="~{comment/comment :: comment}"></div>
+        <div th:replace="~{comment/comment :: comment}"></div>
+    </div>
+    <div th:each="comment: ${comments}">
+        <div th:replace="comment/comment :: comment"></div>
+    </div>
+</div>
+</body>
+</html>

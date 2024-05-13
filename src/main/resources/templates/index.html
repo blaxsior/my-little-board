@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <meta charset="UTF-8">
+    <title>my little board</title>
+</head>
+<body>
+<div th:replace="layout/header :: header">헤더</div>
+<h1>게시판 목록</h1>
+<div class="container">
+    <div class="row">
+        <div class="col" th:insert="channel/component/channel-feed :: channelfeed('hello', null)"></div>
+        <div class="col" th:insert="channel/component/channel-feed :: channelfeed('hello', null)"></div>
+        <hr class="mt-4">
+    </div>
+    <div class="row">
+        <div class="col" th:insert="channel/component/channel-feed :: channelfeed('hello', null)"></div>
+        <div class="col" th:insert="channel/component/channel-feed :: channelfeed('hello', null)"></div>
+        <hr class="mt-4">
+    </div>
+</div>
+<div th:replace="layout/footer :: footer">푸터</div>
+</body>
+</html>

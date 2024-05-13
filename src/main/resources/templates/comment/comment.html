@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="comment" class="border border-2 border-black m-3">
+    <div class="d-flex flex-row justify-content-between bg-secondary-subtle p-2">
+        <div>작성자</div>
+        <div>
+            <span>작성일</span>
+            <span class="vr"></span>
+            <span>
+                <a class="text-decoration-none text-black">
+                    <img src="/icons/exclamation-circle.svg">
+                    <span>신고</span>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="p-2">
+        댓글 내용
+    </div>
+</div>
+</html>

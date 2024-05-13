@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="channelfeed(name, posts)"
+class="border rounded p-2 m-2">
+    <h2><a th:text="${name}" class="border-bottom text-dark">채널 이름</a></h2>
+    <ul>
+        <li><a>게시글 제목 1 &gt;</a></li>
+        <li><a>게시글 제목 2 &gt;</a></li>
+        <li><a>게시글 제목 3 &gt;</a></li>
+        <li><a>게시글 제목 4 &gt;</a></li>
+    </ul>
+
+    <!--        <ul th:each="post: ${posts}">-->
+    <!--            <li th:object="${post}">-->
+    <!--                <a th:text="${post.title}">게시글 제목 1</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+</div>
+</html>
