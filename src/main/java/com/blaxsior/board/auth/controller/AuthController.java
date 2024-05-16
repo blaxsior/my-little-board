@@ -21,7 +21,7 @@ public class AuthController {
             @RequestParam(name = "redirectUrl", required = false) String redirectUrl
     ) {
         if(result.hasErrors()) {
-            return "redirect:auth/login";
+            return "auth/loginPage";
         }
 
         if(redirectUrl != null) {

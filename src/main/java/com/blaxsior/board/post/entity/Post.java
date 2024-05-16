@@ -20,8 +20,21 @@ public class Post {
     @Column(name="title")
     private String title;
 
-    @Column(name="content", length = 65535)
+    @Lob
+    @Column(name="content")
     private String content;
+
+    @Column(name="like")
+    private Long like;
+
+    @Column(name="dislike")
+    private Long dislike;
+
+    @Column(name="recommendable")
+    private boolean recommendable = true;
+
+    @Column(name="editable")
+    private boolean editable = true;
 
     @CreatedDate
     private LocalDateTime createdAt;

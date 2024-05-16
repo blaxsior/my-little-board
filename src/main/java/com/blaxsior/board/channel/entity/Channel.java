@@ -1,31 +1,37 @@
 package com.blaxsior.board.channel.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.blaxsior.board.member.entity.Member;
+import com.blaxsior.board.member_chan_role.entity.MemberChannelRole;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Table(name="channel")
-@Entity
 @Getter
 @Setter
+@Table(name="channel")
+@Entity
 public class Channel {
     @Id
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "chan_code", unique = true)
+    private String chanCode;
+
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name="description")
     private String description;
 
-    @Column(name="activated")
-    private Boolean activated;
+    @Column(name="enabled")
+    private boolean enabled = true;
+
+    @OneToMany(mappedBy = "channel")
+    private List<MemberChannelRole> memberRoles;
 
     @CreatedDate
     private LocalDateTime createdAt;
