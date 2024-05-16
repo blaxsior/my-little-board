@@ -1,5 +1,6 @@
 package com.blaxsior.board.post.entity;
 
+import com.blaxsior.board.comment.entity.Comment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,17 +26,20 @@ public class Post {
     @Column(name="content")
     private String content;
 
-    @Column(name="like")
-    private Long like;
+    @Column(name="likes")
+    private Long likes;
 
-    @Column(name="dislike")
-    private Long dislike;
+    @Column(name="dislikes")
+    private Long dislikes;
 
     @Column(name="recommendable")
     private boolean recommendable = true;
 
     @Column(name="editable")
     private boolean editable = true;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 
     @CreatedDate
     private LocalDateTime createdAt;

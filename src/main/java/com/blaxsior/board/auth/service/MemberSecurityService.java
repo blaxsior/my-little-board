@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class MemberSecurityService implements UserDetailsService {
     private final MemberRepository memberRepository;

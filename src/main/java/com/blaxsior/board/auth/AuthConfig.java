@@ -2,32 +2,45 @@ package com.blaxsior.board.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 
 @Configuration
 public class AuthConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // 임시로 모든 요청 허용
-        http.authorizeHttpRequests(config -> config
-                .anyRequest().permitAll()
+        http.authorizeHttpRequests(config ->
+                config.requestMatchers("/**").authenticated()
         );
         http.formLogin(config -> config
                 .loginPage("/auth/login")
-                .defaultSuccessUrl("/")
+                .loginProcessingUrl("/auth/login")
+                .permitAll()
         );
 
         return http.build();
     }
 
+    @Bean
+    UserDetailsService detailsService() {
+        UserDetails user1 = User.builder()
+                .username("user")
+                .password("{noop}password")
+                .build();
 
+        return new InMemoryUserDetailsManager(user1);
+    }
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        // encode는 bscrypt, matches는 모든 타입 가능. => 더 많은 상황에 대응 가능
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

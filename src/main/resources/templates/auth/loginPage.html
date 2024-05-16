@@ -8,12 +8,12 @@
 <h1>로그인</h1>
 <form th:object="${loginForm}" method="post" th:action="@{/auth/login}">
     <div>
-        <label th:for="*{username}">ID</label>
-        <input th:field="*{username}">
+        <label for="username">ID</label>
+        <input name="username" id="username">
     </div>
     <div>
-        <label th:for="*{password}">password</label>
-        <input th:field="*{password}">
+        <label for="password">password</label>
+        <input name="password" id="password">
     </div>
     <button type="submit">로그인</button>
 </form>
