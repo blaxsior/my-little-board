@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <meta charset="UTF-8">
+    <title>mypage</title>
+</head>
+<body>
+<div th:replace="~{layout/header :: header}">헤더</div>
+<h1>마이페이지</h1>
+<div class="container">
+    <div th:if="${member}">
+        <div>아이디: <span th:text="${member.username}">아이디</span></div>
+        <div>이름: <span th:text="${member.nickname}">이름</span></div>
+        <div>이메일: <span th:text="${member.email}">이메일</span></div>
+    </div>
+</div>
+<div th:replace="~{layout/footer :: footer}">푸터</div>
+</body>
+</html>
