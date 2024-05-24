@@ -1,7 +1,7 @@
-package com.blaxsior.board.web;
+package com.blaxsior.board.domain;
 
 import com.blaxsior.board.domain.member.service.MemberService;
-import com.blaxsior.board.web.loginmember.LoginMemberArgumentResolver;
+import com.blaxsior.board.domain.member.annotation.LoginMemberArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

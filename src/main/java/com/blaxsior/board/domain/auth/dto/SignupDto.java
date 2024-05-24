@@ -1,4 +1,4 @@
-package com.blaxsior.board.web.auth.dto;
+package com.blaxsior.board.domain.auth.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

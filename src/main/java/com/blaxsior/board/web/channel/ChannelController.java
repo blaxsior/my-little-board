@@ -1,4 +1,4 @@
-package com.blaxsior.board.web.channel.controller;
+package com.blaxsior.board.web.channel;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,8 +1,8 @@
-package com.blaxsior.board.web.auth.service;
+package com.blaxsior.board.domain.auth.service;
 
+import com.blaxsior.board.domain.auth.dto.SignupDto;
+import com.blaxsior.board.domain.auth.exception.PasswordConfirmNotMatchException;
 import com.blaxsior.board.domain.member.service.MemberService;
-import com.blaxsior.board.web.auth.dto.SignupDto;
-import com.blaxsior.board.web.auth.exception.PasswordConfirmNotMatchException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

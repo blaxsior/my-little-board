@@ -1,4 +1,4 @@
-package com.blaxsior.board.web.loginmember;
+package com.blaxsior.board.domain.member.annotation;
 
 import com.blaxsior.board.domain.member.entity.Member;
 import com.blaxsior.board.domain.member.service.MemberService;

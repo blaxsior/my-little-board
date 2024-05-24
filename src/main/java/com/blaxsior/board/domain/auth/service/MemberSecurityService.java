@@ -1,4 +1,4 @@
-package com.blaxsior.board.web.auth.service;
+package com.blaxsior.board.domain.auth.service;
 
 import com.blaxsior.board.domain.member.entity.Member;
 import com.blaxsior.board.domain.member.repository.MemberRepository;

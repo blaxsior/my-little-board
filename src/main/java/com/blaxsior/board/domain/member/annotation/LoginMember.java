@@ -1,4 +1,4 @@
-package com.blaxsior.board.web.loginmember;
+package com.blaxsior.board.domain.member.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

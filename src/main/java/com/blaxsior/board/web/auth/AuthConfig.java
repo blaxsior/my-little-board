@@ -1,7 +1,7 @@
 package com.blaxsior.board.web.auth;
 
+import com.blaxsior.board.domain.auth.service.MemberSecurityService;
 import com.blaxsior.board.domain.member.repository.MemberRepository;
-import com.blaxsior.board.web.auth.service.MemberSecurityService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,6 +24,12 @@ public class AuthConfig {
         http.formLogin(config -> config
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/auth/login")
+                .permitAll()
+        );
+        // 로그아웃 경로 지정
+        http.logout(logout -> logout
+                .logoutUrl("/auth/logout")
+                .logoutSuccessUrl("/")
                 .permitAll()
         );
 

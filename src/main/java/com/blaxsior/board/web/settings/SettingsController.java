@@ -1,7 +1,7 @@
-package com.blaxsior.board.web.settings.controller;
+package com.blaxsior.board.web.settings;
 
 import com.blaxsior.board.domain.member.entity.Member;
-import com.blaxsior.board.web.loginmember.LoginMember;
+import com.blaxsior.board.domain.member.annotation.LoginMember;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

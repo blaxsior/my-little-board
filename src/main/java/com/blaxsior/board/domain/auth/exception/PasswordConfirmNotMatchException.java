@@ -1,4 +1,4 @@
-package com.blaxsior.board.web.auth.exception;
+package com.blaxsior.board.domain.auth.exception;
 
 public class PasswordConfirmNotMatchException extends RuntimeException{
     public PasswordConfirmNotMatchException() {

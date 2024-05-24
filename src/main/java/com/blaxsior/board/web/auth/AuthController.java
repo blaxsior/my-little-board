@@ -1,8 +1,8 @@
-package com.blaxsior.board.web.auth.controller;
+package com.blaxsior.board.web.auth;
 
-import com.blaxsior.board.web.auth.exception.PasswordConfirmNotMatchException;
-import com.blaxsior.board.web.auth.service.AuthService;
-import com.blaxsior.board.web.auth.dto.SignupDto;
+import com.blaxsior.board.domain.auth.dto.SignupDto;
+import com.blaxsior.board.domain.auth.service.AuthService;
+import com.blaxsior.board.domain.auth.exception.PasswordConfirmNotMatchException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

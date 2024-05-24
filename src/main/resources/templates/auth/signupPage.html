@@ -6,29 +6,35 @@
     <title>signup</title>
 </head>
 <body>
-<h1>회원가입</h1>
-<form method="post" th:object="${signupform}" th:action="@{/auth/signup}">
-    <div>
-        <label th:field="*{username}" class="form-label">아이디</label>
-        <input th:field="*{username}" class="form-control">
-    </div>
-    <div>
-        <label th:field="*{password}" class="form-label">비밀번호</label>
-        <input th:field="*{password}" class="form-control">
-    </div>
-    <div>
-        <label th:field="*{passwordConfirm}" class="form-label">비밀번호 확인</label>
-        <input th:field="*{passwordConfirm}" class="form-control">
-    </div>
-    <div>
-        <label th:field="*{email}" class="form-label">이메일</label>
-        <input th:field="*{email}" class="form-control">
-    </div>
-    <div>
-        <label th:field="*{nickname}" class="form-label">유저 이름</label>
-        <input th:field="*{nickname}" class="form-control">
-    </div>
-    <button type="submit">회원가입</button>
-</form>
+<div class="container my-4">
+    <h1>회원가입</h1>
+    <hr>
+    <form method="post" th:object="${signupform}" th:action="@{/auth/signup}">
+        <div class="m-3">
+            <label th:field="*{username}" class="form-label">아이디</label>
+            <input th:field="*{username}" class="form-control">
+        </div>
+        <div class="m-3">
+            <label th:field="*{password}" class="form-label">비밀번호</label>
+            <input th:field="*{password}" class="form-control">
+        </div>
+        <div class="m-3">
+            <label th:field="*{passwordConfirm}" class="form-label">비밀번호 확인</label>
+            <input th:field="*{passwordConfirm}" class="form-control">
+        </div>
+        <div class="m-3">
+            <label th:field="*{email}" class="form-label">이메일</label>
+            <input th:field="*{email}" class="form-control">
+        </div>
+        <div class="m-3">
+            <label th:field="*{nickname}" class="form-label">유저 이름</label>
+            <input th:field="*{nickname}" class="form-control">
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary m-3">회원가입</button>
+            <a th:href="@{/}" class="btn btn-outline-secondary m-3">메인 페이지로</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
