@@ -1,4 +1,4 @@
-package com.blaxsior.board.web.auth;
+package com.blaxsior.board.domain.auth;
 
 import com.blaxsior.board.domain.auth.service.MemberSecurityService;
 import com.blaxsior.board.domain.member.repository.MemberRepository;
@@ -15,8 +15,15 @@ public class AuthConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(config -> config
-                // allow create user
-                .requestMatchers("/auth/signup", "/").permitAll()
+                // 메인 페이지
+                .requestMatchers("/").permitAll()
+                // 유저 생성 / 아이디 찾기, 비밀번호 찾기
+                .requestMatchers(
+                        "/auth/signup",
+                        "/auth/find-id",
+                        "auth/find-password",
+                        "/auth/notice"
+                ).permitAll()
                 // 리소스 접근 허용. 로그인 안해도 기본적으로 접근 되야 함.
                 .requestMatchers("/css/**","/icons/**", "/js/**").permitAll()
                 .anyRequest().authenticated()

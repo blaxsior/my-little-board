@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <meta charset="UTF-8">
+    <title>My Little Board</title>
+</head>
+<body>
+<div class="container my-4">
+    <h1>설명</h1>
+    <hr>
+    <div class="alert alert-primary">
+        <p>입력하신 이메일 주소로 유저 정보를 찾을 수 있는 방법을 보냈습니다. 30분 내로 메일을 확인해주세요.</p>
+    </div>
+    <div class="alert alert-warning">
+        <p>잘못된 이메일 주소를 입력한 경우, 정상적인 절차가 진행되지 않을 수 있습니다.</p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a th:href="@{/}" class="btn btn-outline-secondary m-3">메인 페이지로</a>
+    </div>
+</div>
+</body>
+</html>

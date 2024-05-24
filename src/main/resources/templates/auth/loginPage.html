@@ -10,7 +10,7 @@
     <h1>로그인</h1>
     <hr>
     <form th:object="${loginForm}" method="post" th:action="@{/auth/login}">
-        <div th:if="${param.error}"class="alert alert-danger m-3">
+        <div th:if="${param.error}" class="alert alert-danger m-3">
             아이디 또는 비밀번호가 일치하지 않습니다.
         </div>
         <div class="m-3">
@@ -26,6 +26,34 @@
             <a th:href="@{/}" class="btn btn-outline-secondary m-3">메인 페이지로</a>
         </div>
     </form>
+    <hr>
+    <div class="px-5">
+        <div class="card my-4">
+            <div class="card-body">
+                <h5>계정이 없으신가요?</h5>
+                <hr>
+                <ul class="list-unstyled d-flex gap-3">
+                    <li>
+                        <a th:href="@{/auth/signup}" class="btn btn-outline-primary">회원 가입</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card my-4">
+            <div class="card-body">
+                <h5>계정 정보가 기억나지 않으시나요?</h5>
+                <hr>
+                <ul class="list-unstyled d-flex gap-3">
+                    <li>
+                        <a th:href="@{/auth/find-id}" class="btn btn-outline-primary">아이디 찾기</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/auth/find-password}" class="btn btn-outline-primary">비밀번호 찾기</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

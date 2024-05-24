@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <meta charset="UTF-8">
+    <title>find id</title>
+</head>
+<body>
+<div class="container my-4">
+    <h1>아이디 찾기</h1>
+    <hr>
+    <div class="alert alert-secondary">회원가입 시 사용한 이메일을 입력해주세요</div>
+    <form method="post" th:action="@{/auth/find-id}">
+        <div class="m-3">
+            <label for="email" class="form-label">이메일</label>
+            <input name="email" id="email" class="form-control">
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary m-3">아이디 찾기</button>
+            <a th:href="@{/}" class="btn btn-outline-secondary m-3">메인 페이지로</a>
+        </div>
+    </form>
+    <hr>
+    <div class="px-5">
+        <div class="card my-4">
+            <div class="card-body">
+                <h5>계정이 없으신가요?</h5>
+                <hr>
+                <ul class="list-unstyled d-flex gap-3">
+                    <li>
+                        <a th:href="@{/auth/signup}" class="btn btn-outline-primary">회원 가입</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

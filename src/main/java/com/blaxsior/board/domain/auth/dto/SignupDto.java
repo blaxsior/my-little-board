@@ -13,7 +13,7 @@ public class SignupDto {
     private String username;
     // 패턴은 CHATGPT 도움 받음. 7자리 이상, 공백 X. 최소 1개의 특수문자 포함
     @NotBlank
-    @Pattern(regexp = "^(?=.*[!@#$%^&*()-_=+\\\\|\\[{\\]};:'\",<.>/?])(?=\\S+$).{7,}$", message = "invalid password")
+    @Pattern(regexp = "^(?=.*[a-zA-Z0-9])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).{7,}$", message = "invalid password")
     private String password;
 
     @NotBlank

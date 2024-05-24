@@ -1,5 +1,6 @@
 package com.blaxsior.board.web.auth;
 
+import com.blaxsior.board.domain.auth.dto.FindUserInfoDto;
 import com.blaxsior.board.domain.auth.dto.SignupDto;
 import com.blaxsior.board.domain.auth.service.AuthService;
 import com.blaxsior.board.domain.auth.exception.PasswordConfirmNotMatchException;
@@ -45,5 +46,34 @@ public class AuthController {
         }
 
         return "redirect:/";
+    }
+    @GetMapping("/notice")
+    public String notice() {
+        return "auth/noticePage";
+    }
+
+    @GetMapping("/find-id")
+    public String findIdPage() {
+        return "auth/findIdPage";
+    }
+
+    @PostMapping("/find-id")
+    public String findIdPage(@Valid @ModelAttribute FindUserInfoDto dto, BindingResult result) {
+        if(result.hasErrors()) {
+            return "auth/findIdPage";
+        }
+        return "redirect:/auth/notice";
+    }
+    @GetMapping("/find-password")
+    public String findPasswordPage() {
+        return "auth/findPasswordPage";
+    }
+
+    @PostMapping("/find-password")
+    public String findPassword(@Valid @ModelAttribute FindUserInfoDto dto, BindingResult result) {
+        if(result.hasErrors()) {
+            return "auth/findPasswordPage";
+        }
+        return "redirect:/auth/notice";
     }
 }
