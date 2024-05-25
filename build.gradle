@@ -37,7 +37,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 // https://mvnrepository.com/artifact/com.icegreen/greenmail-junit5
-	testImplementation 'com.icegreen:greenmail-junit5:2.0.1'
+	testImplementation 'com.icegreen:greenmail-junit5:2.0.0'
 }
 
 tasks.named('test') {
