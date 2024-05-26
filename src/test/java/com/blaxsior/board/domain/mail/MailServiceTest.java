@@ -22,9 +22,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.thymeleaf.TemplateEngine;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.MAP;
 
 //@SpringBootTest
 @SpringBootTest(
@@ -67,6 +70,25 @@ public class MailServiceTest {
 
         assertThat(new_body).isEqualTo(body);
         assertThat(message.getAllRecipients().length).isEqualTo(1);
+        assertThat(message.getSubject()).isEqualTo(subject);
+    }
+
+    @Test
+    void sendTemplatedEmail() throws MessagingException {
+        var toEmail = "test@test.com";
+        var subject = "test subject";
+        var testparam = "this is testparam";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("testparam", testparam);
+
+        mailService.sendMail(toEmail, subject, "mail/test", params);
+
+        var message = greenMail.getReceivedMessages()[0];
+
+        var new_body = GreenMailUtil.getBody(message);
+        // testparam 포함하는지?
+        assertThat(new_body).contains(testparam);
         assertThat(message.getSubject()).isEqualTo(subject);
     }
 
