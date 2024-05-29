@@ -1,5 +1,6 @@
 package com.blaxsior.board.domain.mail;
 
+import com.blaxsior.board.domain.mail.exception.MailSendFailException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

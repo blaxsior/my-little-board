@@ -15,6 +15,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
+    public void save(Member member) {
+        this.memberRepository.save(member);
+    }
+
+    @Override
+    @Transactional
     public void create(String username, String password, String nickname, String email) {
         var member = new Member();
         member.setUsername(username);
@@ -39,6 +45,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Optional<Member> findByEmail(String email) {
         return memberRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean checkExistByEmail(String email) {
+        return memberRepository.existsByEmail(email);
     }
 
     @Override

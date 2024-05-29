@@ -2,9 +2,11 @@ package com.blaxsior.board.domain.auth;
 
 import com.blaxsior.board.domain.auth.service.MemberSecurityService;
 import com.blaxsior.board.domain.member.repository.MemberRepository;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,20 +19,15 @@ public class AuthConfig {
         http.authorizeHttpRequests(config -> config
                 // 메인 페이지
                 .requestMatchers("/").permitAll()
-                // 유저 생성 / 아이디 찾기, 비밀번호 찾기
-                .requestMatchers(
-                        "/auth/signup",
-                        "/auth/find-id",
-                        "/auth/find-password",
-                        "/auth/notice"
-                ).permitAll()
-                // 리소스 접근 허용. 로그인 안해도 기본적으로 접근 되야 함.
-                .requestMatchers("/css/**","/icons/**", "/js/**").permitAll()
+                // 유저 생성 / 아이디 찾기, 비밀번호 찾기 등 auth는 기본 접근 가능
+                .requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
         );
         http.formLogin(config -> config
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/auth/login")
+                // 인증 전에 보안
+                .defaultSuccessUrl("/", true)
                 .permitAll()
         );
         // 로그아웃 경로 지정
@@ -43,15 +40,12 @@ public class AuthConfig {
         return http.build();
     }
 
-//    @Bean
-//    UserDetailsService detailsService() {
-//        UserDetails user1 = User.builder()
-//                .username("user")
-//                .password("{noop}password")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user1);
-//    }
+    // filter chain 거치지 않고 static 경로 무시 가능
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
 
     @Bean
     UserDetailsService customBeanService(MemberRepository repository) {

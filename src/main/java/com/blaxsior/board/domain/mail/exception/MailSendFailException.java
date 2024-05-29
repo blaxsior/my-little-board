@@ -1,4 +1,4 @@
-package com.blaxsior.board.domain.mail;
+package com.blaxsior.board.domain.mail.exception;
 
 public class MailSendFailException extends RuntimeException{
     public MailSendFailException() {
