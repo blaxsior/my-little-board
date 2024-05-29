@@ -6,7 +6,7 @@ import com.blaxsior.board.domain.auth.dto.SignupDto;
 public interface AuthService {
     void signup(SignupDto signupDto);
 
-//    void findUsername(String email);
-//
-//    void findPassword(String email);
+    void findUsername(String email);
+
+    void resetPassword(String email);
 }

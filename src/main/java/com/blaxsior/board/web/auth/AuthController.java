@@ -62,6 +62,8 @@ public class AuthController {
         if(result.hasErrors()) {
             return "auth/findIdPage";
         }
+
+        authService.findUsername(dto.getEmail());
         return "redirect:/auth/notice";
     }
     @GetMapping("/find-password")
