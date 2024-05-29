@@ -47,7 +47,7 @@ public class AuthController {
 
         return "redirect:/";
     }
-    @GetMapping("/notice")
+    @GetMapping("/cnotice")
     public String notice() {
         return "auth/noticePage";
     }

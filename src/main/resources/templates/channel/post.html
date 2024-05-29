@@ -6,15 +6,15 @@
     <title>my little board</title>
 </head>
 <body>
-<header th:replace="~{/layout/header :: header}">헤더</header>
+<header th:replace="~{layout/header :: header}">헤더</header>
 <div class="container">
-    <div th:replace="~{/post/post :: post}">
+    <div th:replace="~{post/post :: post}">
         본문
     </div>
-    <div th:replace="~{/comment/comment-list :: commentList(null)}">
+    <div th:replace="~{comment/comment-list :: commentList(null)}">
         댓글
     </div>
 </div>
-<footer th:replace="~{/layout/footer :: footer}">푸터</footer>
+<footer th:replace="~{layout/footer :: footer}">푸터</footer>
 </body>
 </html>

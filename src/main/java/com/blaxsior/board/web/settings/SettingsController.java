@@ -16,7 +16,7 @@ public class SettingsController {
     public String myPage(@LoginMember Member member, Model model) {
         log.info("member: {}", member);
         model.addAttribute("member", member);
-        return "/settings/myPage";
+        return "settings/myPage";
     }
 
 }

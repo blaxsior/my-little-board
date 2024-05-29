@@ -21,7 +21,7 @@ public class AuthConfig {
                 .requestMatchers(
                         "/auth/signup",
                         "/auth/find-id",
-                        "auth/find-password",
+                        "/auth/find-password",
                         "/auth/notice"
                 ).permitAll()
                 // 리소스 접근 허용. 로그인 안해도 기본적으로 접근 되야 함.

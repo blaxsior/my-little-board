@@ -8,7 +8,7 @@
 <body>>
 <th:block th:fragment="header">
     <header class="d-flex mx-4 my-3 align-items-center">
-        <div th:insert="~{/layout/logo :: logo}">
+        <div th:insert="~{layout/logo :: logo}">
         </div>
         <div class="ms-auto">
             <nav sec:authorize="!isAuthenticated()" class="nav justify-content-center align-items-center gap-3">
