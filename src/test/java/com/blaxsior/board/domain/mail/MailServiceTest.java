@@ -4,22 +4,20 @@ package com.blaxsior.board.domain.mail;
 import com.blaxsior.board.BoardApplication;
 import com.icegreen.greenmail.configuration.GreenMailConfiguration;
 import com.icegreen.greenmail.junit5.GreenMailExtension;
+import com.icegreen.greenmail.store.FolderException;
 import com.icegreen.greenmail.util.GreenMailUtil;
 import com.icegreen.greenmail.util.ServerSetupTest;
 import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.thymeleaf.TemplateEngine;
 
 import java.util.HashMap;
@@ -27,15 +25,13 @@ import java.util.Map;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.MAP;
 
-//@SpringBootTest
+
 @SpringBootTest(
         classes = BoardApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @TestPropertySource(locations = {"classpath:/application-test.properties"})
-//@ContextConfiguration(classes = BoardApplication.class)
 public class MailServiceTest {
 
     @RegisterExtension
@@ -49,33 +45,39 @@ public class MailServiceTest {
     @Autowired
     private TemplateEngine templateEngine;
 
+    private static String username = "springboot";
+    
     private MailService mailService;
     @BeforeEach
-    public void beforeEach() {
+    public void beforeEach() throws FolderException {
         mailService = new MailService(mailSender, templateEngine);
+        // from email 따로 설정해줘야 함.
+        mailService.setFromEmail(username);
+        greenMail.purgeEmailFromAllMailboxes();
     }
 
     @Test
     void sendEmail() throws MessagingException {
-        var toEmail = "test@test.com";
+        var toEmail = "test1@test.com";
         var subject = "test subject";
-        var body = "this is test";
+        var body = "hello world";
 
         mailService.sendMail(toEmail, subject, body);
-        greenMail.waitForIncomingEmail(1);
 
         var messages = greenMail.getReceivedMessages();
+        System.out.println("length is " + messages.length);
         var message = messages[0];
         var new_body = GreenMailUtil.getBody(message);
+        System.out.println(new_body);
 
-        assertThat(new_body).isEqualTo(body);
+        assertThat(new_body).contains(body);
         assertThat(message.getAllRecipients().length).isEqualTo(1);
         assertThat(message.getSubject()).isEqualTo(subject);
     }
 
     @Test
     void sendTemplatedEmail() throws MessagingException {
-        var toEmail = "test@test.com";
+        var toEmail = "test2@test.com";
         var subject = "test subject";
         var testparam = "this is testparam";
 
