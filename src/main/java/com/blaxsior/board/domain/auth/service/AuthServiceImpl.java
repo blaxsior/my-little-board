@@ -91,9 +91,6 @@ public class AuthServiceImpl implements AuthService {
     public void resetPassword(String token, ResetPasswordDto dto) throws InvalidResetPasswordTokenException, PasswordConfirmNotMatchException {
         String key = getResetTokenKey(token);
         String email = redis.opsForValue().get(key);
-        log.info("token = {}", token);
-        log.info("key = {}", key);
-        log.info("email = {}", email);
         if(email == null) throw new InvalidResetPasswordTokenException("유효하지 않은 패스워드 재설정 세션");
 
         Optional<Member> optMember = memberService.findByEmail(email);
