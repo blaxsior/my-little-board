@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <meta charset="UTF-8">
+    <title>채널 생성</title>
+</head>
+<body>
+<div th:replace="~{layout/header :: header}">헤더</div>
+<div class="container-sm">
+    <h1>채널 생성</h1>
+    <form method="post" th:object="${createChanForm}" th:action="@{/settings/create-channel}">
+        <span th:each="err: ${#fields.globalErrors()}" th:text="${err}"></span>
+        <div class="m-3 row row-cols-2">
+            <div class="col">
+                <label th:field="*{name}" class="form-label">채널 이름</label>
+                <span th:errors="*{name}" class="text-danger"></span>
+                <input th:field="*{name}" class="form-control">
+            </div>
+            <div class="card col">
+                <div class="card-body">
+                    <p>채널의 이름입니다. "~" 채널 형태로 표현됩니다.</p>
+                    <div class="alert alert-warning">채널의 이름은 한번 설정하면 변경할 수 없습니다.</div>
+                </div>
+            </div>
+        </div>
+        <div class="m-3 row row-cols-2">
+            <div class="col">
+                <label th:field="*{chanCode}" class="form-label">채널 코드</label>
+                <span th:errors="*{chanCode}" class="text-danger"></span>
+                <input th:field="*{chanCode}" class="form-control">
+            </div>
+            <div class="card col">
+                <div class="card-body">
+                    <p>채널의 URL에 사용될 코드입니다. /channel/{code} 형식으로 표현됩니다.</p>
+                    <div class="alert alert-warning">채널 코드는 한번 설정하면 변경할 수 없습니다.</div>
+                </div>
+            </div>
+        </div>
+        <div class="m-3 row row-cols-2">
+            <div class="col">
+                <label th:field="*{description}" class="form-label">채널 설명</label>
+                <span th:errors="*{description}" class="text-danger"></span>
+                <input th:field="*{description}" class="form-control">
+            </div>
+            <div class="card col">
+                <div class="card-body">
+                    <p>채널에 대한 설명입니다</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary m-3">채널 생성</button>
+            <a th:href="@{/}" class="btn btn-outline-secondary m-3">메인 페이지로</a>
+        </div>
+    </form>
+</div>
+<div th:replace="~{layout/footer :: footer}">푸터</div>
+</body>
+</html>

@@ -2,17 +2,15 @@ package com.blaxsior.board.web.channel;
 
 import com.blaxsior.board.domain.channel.service.ChannelService;
 import com.blaxsior.board.domain.global.exception.NotFoundException;
-import com.blaxsior.board.domain.member.annotation.LoginMember;
-import com.blaxsior.board.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.NotFound;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
+@Slf4j
 @Controller
-@RequestMapping("/chan/{chanCode}")
+@RequestMapping("/channel/{chanCode}")
 @RequiredArgsConstructor
 public class ChannelController {
     private final ChannelService channelService;
@@ -22,22 +20,13 @@ public class ChannelController {
      */
     @GetMapping
     public String channelIndexPage(@PathVariable("chanCode") String chanCode, Model model) {
+        log.info(chanCode);
         var channel = channelService.findChannel(chanCode);
-        if(channel == null) {
+        if (channel == null) {
             throw new NotFoundException();
         }
         model.addAttribute("channel", channel);
         return "channel/index";
-    }
-
-
-    /**
-     * 채널 생성
-     */
-    @GetMapping("/create")
-    public String createChannelPage() {
-
-        return "channel/createPage";
     }
 
     /**

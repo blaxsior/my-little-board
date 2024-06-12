@@ -18,6 +18,7 @@ import java.util.List;
 @Entity
 public class Channel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "chan_code", unique = true)

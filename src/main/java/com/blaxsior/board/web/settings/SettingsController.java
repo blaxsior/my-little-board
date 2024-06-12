@@ -2,6 +2,8 @@ package com.blaxsior.board.web.settings;
 
 import com.blaxsior.board.domain.auth.dto.ChangePasswordDto;
 import com.blaxsior.board.domain.auth.service.AuthService;
+import com.blaxsior.board.domain.channel.dto.CreateChannelDto;
+import com.blaxsior.board.domain.channel.service.ChannelService;
 import com.blaxsior.board.domain.member.entity.Member;
 import com.blaxsior.board.domain.member.annotation.LoginMember;
 import jakarta.validation.Valid;
@@ -15,12 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
-
 @Controller
 @RequestMapping("/settings")
 @RequiredArgsConstructor
 public class SettingsController {
     private final AuthService authService;
+    private final ChannelService channelService;
+
     @GetMapping("/mypage")
     public String myPage(@LoginMember Member member, Model model) {
         log.info("member: {}", member);
@@ -50,5 +53,37 @@ public class SettingsController {
         }
 
         return "/";
+    }
+
+    /**
+     * 채널 생성 페이지
+     */
+    @GetMapping("/create-channel")
+    public String createChannelPage(@ModelAttribute("createChanForm") CreateChannelDto dto) {
+
+        return "channel/createPage";
+    }
+
+    /**
+     * 채널 생성
+     */
+    @PostMapping("/create-channel")
+    public String createChannel(
+//            @LoginMember Member member,
+            @Valid @ModelAttribute("createChanForm") CreateChannelDto dto,
+            BindingResult result
+    ) {
+        if(result.hasErrors()) {
+            return "channel/createPage";
+        }
+
+        try {
+            channelService.createChannel(dto.getChanCode(), dto.getName(), dto.getDescription());
+        } catch(Exception e) {
+            result.reject(null, e.getMessage());
+            return "channel/createPage";
+        }
+
+        return "redirect:/channel/" + dto.getChanCode();
     }
 }
