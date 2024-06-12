@@ -1,5 +1,6 @@
 package com.blaxsior.board.domain.auth.service;
 
+import com.blaxsior.board.domain.auth.dto.ChangePasswordDto;
 import com.blaxsior.board.domain.auth.dto.ResetPasswordDto;
 import com.blaxsior.board.domain.auth.dto.SignupDto;
 import com.blaxsior.board.domain.auth.exception.PasswordConfirmNotMatchException;
@@ -99,7 +100,7 @@ public class AuthServiceImpl implements AuthService {
 
         String password = dto.getPassword();
         String passwordConfirm = dto.getPasswordConfirm();
-        checkPasswordMatch(password, passwordConfirm);
+        checkPasswordSame(password, passwordConfirm);
 
         var encoded_password = passwordEncoder.encode(password);
 
@@ -112,10 +113,34 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
+    public void changePassword(Long userId, ChangePasswordDto dto) {
+        // 현재 비밀번호가 맞는지 체크
+        var optMember = memberService.findById(userId);
+        if(optMember.isEmpty()) {
+            throw new RuntimeException("대응되는 유저가 없음");
+        }
+
+        var member = optMember.get();
+        // 기존 비밀번호가 매칭되는지 검사
+        checkPasswordMatch(member.getPassword(), dto.getBeforePassword());
+
+        // 새로운 비밀번호끼리 일치하는지 검사
+        String newPassword = dto.getNewPassword();
+        String newPasswordConfirm = dto.getNewPasswordConfirm();
+        checkPasswordSame(newPassword, newPasswordConfirm);
+
+        // 일치하면? 비밀번호 변경하고 저장
+        String newEncodedPassword = passwordEncoder.encode(newPassword);
+        member.setPassword(newEncodedPassword);
+        memberService.save(member);
+    }
+
+    @Override
     public void signup(SignupDto signupDto) {
         var password = signupDto.getPassword();
         var passwordConfirm = signupDto.getPasswordConfirm();
-        checkPasswordMatch(password, passwordConfirm);
+        checkPasswordSame(password, passwordConfirm);
 
         var encoded_password = passwordEncoder.encode(password);
 
@@ -131,7 +156,11 @@ public class AuthServiceImpl implements AuthService {
         return "reset-password:" + token;
     }
 
-    private void checkPasswordMatch(String password, String passwordConfirm) throws PasswordConfirmNotMatchException {
+    private void checkPasswordSame(String password, String passwordConfirm) throws PasswordConfirmNotMatchException {
         if(!password.equals(passwordConfirm)) throw new PasswordConfirmNotMatchException("패스워드 확인이 일치하지 않습니다.");
+    }
+
+    private void checkPasswordMatch(String encodedPassword, String password) {
+        if(!passwordEncoder.matches(password, encodedPassword)) throw new PasswordConfirmNotMatchException("패스워드 확인이 일치하지 않습니다.");
     }
 }

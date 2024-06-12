@@ -9,6 +9,10 @@
 <div th:replace="~{layout/header :: header}">헤더</div>
 <h1>마이페이지</h1>
 <div class="container">
+    <ul>
+        <li><a th:href</li>
+        <li><a th:href="@{/settings/change-password}">비밀번호 변경</a></li>
+    </ul>
     <div th:if="${member}">
         <div>아이디: <span th:text="${member.username}">아이디</span></div>
         <div>이름: <span th:text="${member.nickname}">이름</span></div>

@@ -2,8 +2,7 @@ package com.blaxsior.board.domain.channel.entity;
 
 import com.blaxsior.board.domain.member_chan_role.entity.MemberChannelRole;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -11,6 +10,10 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+
 @Table(name="channel")
 @Entity
 public class Channel {
@@ -26,6 +29,7 @@ public class Channel {
     @Column(name="description")
     private String description;
 
+    @Builder.Default // default 값으로 사용
     @Column(name="enabled")
     private boolean enabled = true;
 
